@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {Link} from "react-router-dom"
 
 function Rota() {
     const [images, setImages] = useState([])
@@ -19,16 +20,17 @@ function Rota() {
             </ConteinerFilmes>
         )
     }
-
     return (
         <>
             <ConteinerFilmes>
                 Selecione seu filme
                 <Filmes>
                     {images.map(image => (
-                        <Filme key={image.id}>
+                        <Link to={`/sessoes/${image.id}`}>
+                        <Filme data-test="movie" key={image.id}>
                             <img src={image.posterURL} alt={image.title}></img>
                         </Filme>
+                        </Link>
                     ))}
                 </Filmes>
             </ConteinerFilmes>
@@ -37,6 +39,7 @@ function Rota() {
 }
 
 export default Rota;
+export class imagem{};
 
 const ConteinerFilmes = styled.div`
 margin-top:30px;
