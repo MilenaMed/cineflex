@@ -1,20 +1,21 @@
 import Cabeçario from "./componentes/Cabeçario";
-import Rota from "./componentes/Rota";
+import PagInicial from "./componentes/Rota";
+import Sessoes from "./componentes/Sessoes";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  let imageid = 2;
 
   return (
     <>
       <BrowserRouter>
         <Cabeçario />
-      <Routes>
-        <Route path="/" element={<Rota/>} />
-        <Route path={`/sessoes/${imageid}`} />
-        <Route path="/assentos/:idSessao" />
-      </Routes>
+        <Routes>
+          <Route path="/" element={<PagInicial/>}/>
+          <Route path="/sessoes/:idFilme" element={<Sessoes/>}/>
+        </Routes>
       </BrowserRouter>
+
+
     </>
   );
 }

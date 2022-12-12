@@ -21,6 +21,7 @@ font-weight: 400;
 font-size: 34px;
 color: #E8833A;
 display:flex;
+position:fixed;
 justify-content:center;
 align-items: center;
 top:0;

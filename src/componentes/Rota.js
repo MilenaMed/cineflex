@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {Link} from "react-router-dom"
 
-function Rota() {
+
+function PagInicial() {
     const [images, setImages] = useState([])
 
     useEffect(() => {
@@ -26,9 +27,9 @@ function Rota() {
                 Selecione seu filme
                 <Filmes>
                     {images.map(image => (
-                        <Link to={`/sessoes/${image.id}`}>
+                        <Link to={"/sessoes/:idFilme"}>
                         <Filme data-test="movie" key={image.id}>
-                            <img src={image.posterURL} alt={image.title}></img>
+                            <img src={image.posterURL} alt={image.title} id={image.id}></img>
                         </Filme>
                         </Link>
                     ))}
@@ -38,8 +39,7 @@ function Rota() {
     )
 }
 
-export default Rota;
-export class imagem{};
+export default PagInicial;
 
 const ConteinerFilmes = styled.div`
 margin-top:30px;
