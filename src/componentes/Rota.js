@@ -42,7 +42,7 @@ function PagInicial() {
 export default PagInicial;
 
 const ConteinerFilmes = styled.div`
-margin-top:30px;
+margin-top:100px;
 font-size: 24px;
 font-family: 'Roboto';
 font-weight: 400;

@@ -2,15 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 function Dia({ weekday, date, time }) {
 
     return (
         <Horario data-test="movie-day">
             {`${weekday} - ${date}`}
             <Horas>
-                {time.map((tempo) => (
-                    <Link data-test="showtime" to={`/assentos/${tempo.id}`} key={tempo.id}>
-                        <Hora>{tempo.name}</Hora>
+                {time.map((sessao) => (
+                    <Link data-test="showtime" to={`/assentos/${sessao.id}`} key={sessao.id}>
+                        <Hora>{sessao.name}</Hora>
                     </Link>
                 ))}
             </Horas>

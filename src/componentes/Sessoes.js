@@ -49,7 +49,7 @@ function Sessoes() {
 export default Sessoes;
 
 const ConteinerSessao = styled.div`
-margin-top:30px;
+margin-top:100px;
 margin-bottom:150px;
 font-size: 24px;
 font-family: 'Roboto';

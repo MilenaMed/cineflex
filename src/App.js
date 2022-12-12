@@ -1,6 +1,7 @@
 import Cabeçario from "./componentes/Cabeçario";
 import PagInicial from "./componentes/Rota";
 import Sessoes from "./componentes/Sessoes";
+import Assentos from "./componentes/Assentos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<PagInicial/>}/>
           <Route path="/sessoes/:FilmeId" element={<Sessoes/>} />
+          <Route path="/assentos/:SessaoId" element={<Assentos/>} />
         </Routes>
       </BrowserRouter>
     </>
