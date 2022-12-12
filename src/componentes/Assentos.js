@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import DisponibilidadeAssentos from "./DisponibilidadeAssentos";
+import { Link, useParams } from "react-router-dom";
+
 
 function Assentos() {
     const [assentos, setAssentos] = useState(null);
+    const [NomeComprador, setNomeComprador] = useState("");
+    const [CPF, setCPF] = useState("");
     let { SessaoId } = useParams();
 
     useEffect(() => {
@@ -15,7 +17,6 @@ function Assentos() {
             setAssentos(resposta.data));
         pedido.catch((err) => console.log(err));
     }, [SessaoId])
-
     if (assentos === null) {
         return (
             <ConteinerAssentos>
@@ -24,32 +25,63 @@ function Assentos() {
         )
     }
 
+    function handleSeat(assento) {
+        if (assento.isAvailable === false) {
+            return (alert("Esse assento não está disponível"))
+        }
+        console.log(NomeComprador)
+        console.log(CPF)
+    }
+
     return (
         <>
             <ConteinerAssentos>
                 Selecione seu(s) assento(s):
-                <DisponibilidadeAssentos></DisponibilidadeAssentos>
+                <ConteinerDisponibilidade>
+                    {assentos.seats.map(assento => (
+                        <SelecionarAssento onClick={() => handleSeat(assento)} disponivel={assento.isAvailable} data-test="seat" key={assento.id}>{assento.name}</SelecionarAssento>
+                    ))}
+                </ConteinerDisponibilidade>
+                <Conteiner>
+                    <ConteinerLegenda>
+                        <Legenda cor="#1AAE9E" borda="#0E7D71"></Legenda>Selecionado
+                    </ConteinerLegenda>
+                    <ConteinerLegenda>
+                        <Legenda cor="#C3CFD9" borda="#7B8B99"></Legenda>Disponível
+                    </ConteinerLegenda>
+                    <ConteinerLegenda>
+                        <Legenda cor="#FBE192" borda="#F7C52B" ></Legenda>Indisponível
+                    </ConteinerLegenda>
+                </Conteiner>
                 <ConteinerInputs>
-                Nome do comprador:
-                <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Digite seu nome"
-                    data-test="client-name"
-                    autoComplete="off"
-                />
-                CPF do comprador:
-                <Input
-                    id="name"
-                    name="name"
-                    type="name"
-                    placeholder="Digite seu cpf"
-                    data-test="client-name"
-                    autoComplete="off"
-                />
+                    Nome do comprador:
+                    <Input
+                        id="name"
+                        name="name"
+                        type="text"
+                        required value={NomeComprador}
+                        onChange={(e) => setNomeComprador(e.target.value)}
+                        placeholder="Digite seu nome"
+                        data-test="client-name"
+                        autoComplete="off"
+                    />
+                    CPF do comprador:
+                    <Input
+                        id="cpf"
+                        name="cpf"
+                        type="cpf"
+                        placeholder="Digite seu cpf"
+                        data-test="client-cpf"
+                        required value={CPF}
+                        onChange={(e) => setCPF(e.target.value)}
+                        autoComplete="off"
+                    />
                 </ConteinerInputs>
-                <Reservar>Reservar assento(s)</Reservar>
+                <Reservar data-test="book-seat-btn">
+                    <Link to={`/sucesso`}>
+                        Reservar assento(s)
+                    </Link>
+                </Reservar>
             </ConteinerAssentos>
             <Rodape data-test="footer">
                 <Cartaz>
@@ -75,6 +107,7 @@ justify-content:center;
 align-items:center;
 `
 const ConteinerInputs = styled.div`
+width: 300px;
 margin-top:30px;
 font-size: 18px;
 display:flex;
@@ -83,7 +116,7 @@ gap:10px;
 `
 
 const Input = styled.input`
-width: 327px;
+width: 300px;
 height: 51px;
 border: 1px solid #D5D5D5;
 border-radius: 3px;
@@ -93,6 +126,7 @@ font-size: 18px;
 `
 const Reservar = styled.button`
 margin-top:30px;
+margin-bottom:150px;
 width: 225px;
 height: 42px;
 font-family: 'Roboto';
@@ -140,4 +174,48 @@ img{
     width: 48px;
     height: 72px;
 }
+`
+
+const SelecionarAssento = styled.div`
+width: 26px;
+height: 26px;
+background-color: ${(props) => !props.disponivel ? "#FBE192" : "#C3CFD9"};
+border: 1px solid ${(props) => !props.disponivel ? "#F7C52B" : "#808f9d"};
+border-radius: 12px;
+font-size: 11px;
+display:flex;
+justify-content:center;
+align-items:center;
+`
+const Legenda = styled.div`
+width: 26px;
+height: 26px;
+background-color: ${props => props.cor};
+border: 1px solid ${props => props.borda};
+border-radius: 12px;
+display:flex;
+justify-content:center;
+align-items:center;
+`
+const ConteinerDisponibilidade = styled.div`
+margin-top:30px;
+width: 300px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:10px;
+`
+const Conteiner = styled.div`
+width: 300px;
+display:flex;
+`
+const ConteinerLegenda = styled.div`
+font-size: 13px;
+margin-top:15px;
+width: 300px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:10px;
 `

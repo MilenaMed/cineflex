@@ -1,53 +1,8 @@
 import styled from "styled-components";
 
 function DisponibilidadeAssentos() {
-    return (
-        <>
-
-            <ConteinerDisponibilidade>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-                <SelecionarAssento>1</SelecionarAssento>
-            </ConteinerDisponibilidade>
-            <Conteiner>
-                <ConteinerLegenda>
-                    <Legenda cor="#1AAE9E" borda="#0E7D71"></Legenda>Selecionado
-                </ConteinerLegenda>
-                <ConteinerLegenda>
-                    <Legenda cor="#C3CFD9" borda="#7B8B99"></Legenda>Disponível
-                </ConteinerLegenda>
-                <ConteinerLegenda>
-                    <Legenda cor="#FBE192" borda="#F7C52B" ></Legenda>Indisponível
-                </ConteinerLegenda>
-            </Conteiner>
-
-        </>
-    )
+    const assentos= {assento:1, assento:2}
+    return
 }
 
 export default DisponibilidadeAssentos;
