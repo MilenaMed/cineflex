@@ -5,16 +5,16 @@ import {Link} from "react-router-dom"
 
 
 function PagInicial() {
-    const [images, setImages] = useState([])
+    const [filmes, setFilmes] = useState([])
 
     useEffect(() => {
         const requisicao = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies");
         requisicao.then(resposta =>
-            setImages(resposta.data));
+            setFilmes(resposta.data));
         requisicao.catch(err => console.log(err.resposta.data))
     }, [])
 
-    if (images.length === 0){
+    if (filmes.length === 0){
         return (
             <ConteinerFilmes>
                 <Carregando src="http://portal.ufvjm.edu.br/a-universidade/cursos/grade_curricular_ckan/loading.gif"></Carregando>
@@ -26,10 +26,10 @@ function PagInicial() {
             <ConteinerFilmes>
                 Selecione seu filme
                 <Filmes>
-                    {images.map(image => (
-                        <Link to={"/sessoes/:idFilme"}>
-                        <Filme data-test="movie" key={image.id}>
-                            <img src={image.posterURL} alt={image.title} id={image.id}></img>
+                    {filmes.map(filme => (
+                        <Link key={filmes.id} to={`/sessoes/${filme.id}`}>
+                        <Filme data-test="movie" key={filme.id}>
+                            <img src={filme.posterURL} alt={filme.title} id={filme.id}></img>
                         </Filme>
                         </Link>
                     ))}
@@ -52,6 +52,7 @@ justify-content:center;
 align-items:center;
 `
 const Carregando = styled.img`
+margin-top:60px;
 height: 200px;
 `
 

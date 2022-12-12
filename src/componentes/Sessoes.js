@@ -8,13 +8,13 @@ import Dia from "./Dias";
 
 function Sessoes() {
     const [diaDoFilme, setDiaDoFilme] = useState(null);
-    let { idFilme } = useParams();
+    let { FilmeId } = useParams();
 
     useEffect(() => {
-        const promisse = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/7/showtimes`);
+        const promisse = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${FilmeId}/showtimes`);
         promisse.then((resp) =>
             setDiaDoFilme(resp.data));
-        promisse.catch(err => console.log(err));
+        promisse.catch((err) => console.log(err));
     }, [])
 
 
@@ -31,8 +31,8 @@ function Sessoes() {
             <ConteinerSessao>
                 Escolha o horário
                 <Horarios>
-                    {diaDoFilme.days.map((day) => (
-                        <Dia key={day.id} weekday={day.weekday} date={day.date} time={day.showtimes} />
+                    {diaDoFilme.days.map((d) => (
+                        <Dia key={d.id} weekday={d.weekday} date={d.date} time={d.showtimes} />
                     ))}
                 </Horarios>
             </ConteinerSessao>
@@ -98,5 +98,6 @@ img{
 }
 `
 const Carregando = styled.img`
+margin-top:60px;
 height: 200px;
 `

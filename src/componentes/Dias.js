@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function Dia(weekday, date, time) {
-    //const { weekday, date, time } = props;
+function Dia({ weekday, date, time }) {
 
     return (
         <Horario data-test="movie-day">

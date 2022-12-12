@@ -11,11 +11,9 @@ function App() {
         <Cabeçario />
         <Routes>
           <Route path="/" element={<PagInicial/>}/>
-          <Route path="/sessoes/:idFilme" element={<Sessoes/>}/>
+          <Route path="/sessoes/:FilmeId" element={<Sessoes/>} />
         </Routes>
       </BrowserRouter>
-
-
     </>
   );
 }
