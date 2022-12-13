@@ -49,13 +49,16 @@ function Assentos() {
             NomeComprador,
         };
 
-        if(assentosReservados.length > 0 && CPF.length === 11 && NomeComprador.length > 0){
-            const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
-        {
+        const corpo = {
             ids: assentosReservados,
             name: NomeComprador,
             cpf: CPF
-        })
+        }
+
+        if(assentosReservados.length > 0 && CPF.length === 11 && NomeComprador.length > 0){
+            const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
+        corpo)
+        requisicao.catch((erro) => console.log(`Ocorreu um erro ${erro}`));
         requisicao.then(() => navigate("/sucesso", { state: dados }));
 
         }else{
