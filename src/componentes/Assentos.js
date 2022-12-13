@@ -113,8 +113,8 @@ function Assentos() {
                         />
                     </form>
                 </ConteinerInputs>
-                <Reservar>
-                    <Link to={"/sucesso"} onClick={passarDados} data-test="book-seat-btn">
+                <Reservar onClick={passarDados} data-test="book-seat-btn">
+                    <Link to={"/sucesso"}>
                         Reservar assento(s)
                     </Link>
                 </Reservar>
