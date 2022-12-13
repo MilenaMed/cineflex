@@ -11,17 +11,17 @@ function Sucesso() {
                 <Titulo>
                     Pedido feito com sucesso!
                 </Titulo>
-                <ConteinerDados>
+                <ConteinerDados data-test="movie-info">
                     <p> Filme e Sessão</p>
                     {titulo}
                     <br></br>
                     {data} - {hora}
                 </ConteinerDados>
-                <ConteinerDados>
+                <ConteinerDados data-test="seats-info">
                     <p> Ingressos</p>
                     <br>{assentosReservados}</br>
                 </ConteinerDados>
-                <ConteinerDados>
+                <ConteinerDados data-test="client-info">
                     <p> Comprador</p>
                     Nome: {NomeComprador}
                     <br></br>
