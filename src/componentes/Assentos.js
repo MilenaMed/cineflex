@@ -2,14 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 
 function Assentos() {
     const [assentos, setAssentos] = useState(null);
     const [NomeComprador, setNomeComprador] = useState("");
     const [CPF, setCPF] = useState("");
+    const assentosReservados = []
     let { SessaoId } = useParams();
+    const navigate = useNavigate();;
 
     useEffect(() => {
         const pedido = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${SessaoId}/seats`);
@@ -28,9 +30,27 @@ function Assentos() {
     function handleSeat(assento) {
         if (assento.isAvailable === false) {
             return (alert("Esse assento não está disponível"))
+        } else if (assento.isAvailable === true) {
+            assentosReservados.push(assento.name)
+            console.log(NomeComprador)
+            console.log(CPF)
+            console.log(assentosReservados)
         }
-        console.log(NomeComprador)
-        console.log(CPF)
+
+    }
+
+    function passarDados(event) {
+        event.preventDefault();
+        const dados = {
+            assentos: assentosReservados,
+            titulo: assentos.movie.title,
+            data: assentos.day.weekday,
+            hora: assentos.name,
+            CPF,
+            NomeComprador,
+        };
+        navigate("/sucesso", { state: dados })
+        console.log(dados)
     }
 
     return (
@@ -55,30 +75,36 @@ function Assentos() {
                 </Conteiner>
                 <ConteinerInputs>
                     Nome do comprador:
-                    <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required value={NomeComprador}
-                        onChange={(e) => setNomeComprador(e.target.value)}
-                        placeholder="Digite seu nome"
-                        data-test="client-name"
-                        autoComplete="off"
-                    />
+                    <form>
+                        <Input
+                            id="name"
+                            name="name"
+                            type="text"
+                            required
+                            value={NomeComprador}
+                            onChange={(e) => setNomeComprador(e.target.value)}
+                            placeholder="Digite seu nome"
+                            data-test="client-name"
+                            autoComplete="off"
+                        />
+                    </form>
                     CPF do comprador:
-                    <Input
-                        id="cpf"
-                        name="cpf"
-                        type="cpf"
-                        placeholder="Digite seu cpf"
-                        data-test="client-cpf"
-                        required value={CPF}
-                        onChange={(e) => setCPF(e.target.value)}
-                        autoComplete="off"
-                    />
+                    <form>
+                        <Input
+                            id="cpf"
+                            name="cpf"
+                            type="cpf"
+                            required
+                            placeholder="Digite seu cpf"
+                            data-test="client-cpf"
+                            value={CPF}
+                            onChange={(e) => setCPF(e.target.value)}
+                            autoComplete="off"
+                        />
+                    </form>
                 </ConteinerInputs>
                 <Reservar data-test="book-seat-btn">
-                    <Link to={`/sucesso`}>
+                    <Link to={`/sucesso`} onClick={passarDados}>
                         Reservar assento(s)
                     </Link>
                 </Reservar>
