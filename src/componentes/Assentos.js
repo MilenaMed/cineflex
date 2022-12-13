@@ -49,7 +49,7 @@ function Assentos() {
             NomeComprador,
         };
 
-        if(assentosReservados.length > 0){
+        if(assentosReservados.length > 0 && CPF.length === 11 && NomeComprador.length > 0){
             const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
         {
             ids: assentosReservados,
@@ -59,7 +59,7 @@ function Assentos() {
         requisicao.then(() => navigate("/sucesso", { state: dados }));
 
         }else{
-            alert("escolha seu(s) assento(s)")
+            alert("erro: digite um cpf válido,nome e selecione seu(s) assento(s)")
         }
     }
 
@@ -113,11 +113,11 @@ function Assentos() {
                         />
                     </form>
                 </ConteinerInputs>
-                <Reservar onClick={passarDados} data-test="book-seat-btn">
-                    <Link to={"/sucesso"}>
+                    <Link to={"/sucesso"} >
+                    <Reservar onClick={passarDados} data-test="book-seat-btn">
                         Reservar assento(s)
+                        </Reservar>
                     </Link>
-                </Reservar>
             </ConteinerAssentos>
             <Rodape data-test="footer">
                 <Cartaz>
