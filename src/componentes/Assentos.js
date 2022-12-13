@@ -34,18 +34,14 @@ function Assentos() {
             let arrayAssentos = [...assentosReservados]
             arrayAssentos.push(assento.name)
             setAssentosReservados(arrayAssentos)
-            console.log(NomeComprador)
-            console.log(CPF)
-            console.log(assentosReservados)
         }
 
     }
 
     function passarDados(event) {
         event.preventDefault();
-        
         const dados = {
-            assentos: assentosReservados,
+            assentosIds: assentosReservados,
             titulo: assentos.movie.title,
             data: assentos.day.weekday,
             hora: assentos.name,
@@ -53,13 +49,18 @@ function Assentos() {
             NomeComprador,
         };
 
-        const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
+        if(assentosReservados.length > 0){
+            const requisicao = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many",
         {
             ids: assentosReservados,
             name: NomeComprador,
             cpf: CPF
         })
         requisicao.then(() => navigate("/sucesso", { state: dados }));
+
+        }else{
+            alert("escolha seu(s) assento(s)")
+        }
     }
 
     return (
@@ -112,8 +113,8 @@ function Assentos() {
                         />
                     </form>
                 </ConteinerInputs>
-                <Reservar onClick={passarDados} data-test="book-seat-btn">
-                    <Link to={"/sucesso"}>
+                <Reservar>
+                    <Link to={"/sucesso"} onClick={passarDados} data-test="book-seat-btn">
                         Reservar assento(s)
                     </Link>
                 </Reservar>

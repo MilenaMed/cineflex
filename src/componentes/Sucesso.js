@@ -3,7 +3,7 @@ import { Link , useLocation } from "react-router-dom";
 
 function Sucesso() {
     const location = useLocation();
-    const { assentosReservados, titulo, data, hora, CPF, NomeComprador } = location.state;
+    const { assentosIds, titulo, data, hora, CPF, NomeComprador } = location.state;
 
     return (
         <>
@@ -19,7 +19,9 @@ function Sucesso() {
                 </ConteinerDados>
                 <ConteinerDados data-test="seats-info">
                     <p> Ingressos</p>
-                    <br>{assentosReservados}</br>
+                    {assentosIds.map(reservado => (
+                        <h1 key={reservado}>{`Assento ${reservado}`}</h1>
+                    ))}
                 </ConteinerDados>
                 <ConteinerDados data-test="client-info">
                     <p> Comprador</p>
