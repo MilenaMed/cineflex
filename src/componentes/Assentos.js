@@ -9,7 +9,7 @@ function Assentos() {
     const [assentos, setAssentos] = useState(null);
     const [NomeComprador, setNomeComprador] = useState("");
     const [CPF, setCPF] = useState("");
-    const assentosReservados = []
+    const [assentosReservados,setAssentosReservados] = useState([])
     let { SessaoId } = useParams();
     const navigate = useNavigate();;
 
@@ -31,7 +31,9 @@ function Assentos() {
         if (assento.isAvailable === false) {
             return (alert("Esse assento não está disponível"))
         } else if (assento.isAvailable === true) {
-            assentosReservados.push(assento.name)
+            let arrayAssentos = [...assentosReservados]
+            arrayAssentos.push(assento.name)
+            setAssentosReservados(arrayAssentos)
             console.log(NomeComprador)
             console.log(CPF)
             console.log(assentosReservados)
@@ -110,8 +112,8 @@ function Assentos() {
                         />
                     </form>
                 </ConteinerInputs>
-                <Reservar data-test="book-seat-btn">
-                    <Link to={"/sucesso"} onClick={passarDados}>
+                <Reservar onClick={passarDados} data-test="book-seat-btn">
+                    <Link to={"/sucesso"}>
                         Reservar assento(s)
                     </Link>
                 </Reservar>
